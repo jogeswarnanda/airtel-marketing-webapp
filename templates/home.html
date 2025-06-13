@@ -12,16 +12,20 @@
             height: 360px;
             object-fit: cover;
             width: 100%;
+            margin-bottom: 16px;
         }
     </style>
 
 <body>
+    {% include 'nav.html' %}
     <div class="container">
         <h1 class="text-center">Airtel Marketing Team</h1>
-        <img class="img-fluid mt-2 mb-2" id="banner" src="static/banner.jpg">
-        <p>Hello. Welcome to Airtel Marketing Team !</p>
+
     </div>
+    <img class="img-fluid mt-2 mb-2" id="banner" src="static/banner.jpg">
+    <p>Hello. Welcome to Airtel Marketing Team !</p>
 </body>
+{% include 'footer.html' %}
 </head>
 
 </html>
