@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup - Airtel </title>
+    {% include 'bootstrap.html' %}
+</head>
+
+<body>
+
+    <div class="wrapper">
+        {% include 'sidebar.html' %}
+        <div class="main-content">
+            <br>
+            <div class="container py-5">
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-info">{{ messages[0] }}</div>
+                {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mt-4">
+                        <h4 class="mb-2">Full Name</h4>
+                        <div class="mt-2">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person text-danger"></i>
+                                </span>
+                                <input type="text" class="form-control border-danger-subtle select-red" name="p_name"
+                                    value="{{prof_name}}" placeholder="Name">
+                            </div>
+                        </div>
+
+                        <h4 class="mt-2">Mobile Number</h4>
+                        <div class="mt-2">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-phone text-danger"></i>
+                                </span>
+                                <input type="text" class="form-control border-danger-subtle select-red" name="p_mobile"
+                                    value="{{prof_mobile}}" placeholder="Mobile">
+                            </div>
+                        </div>
+                        <h4 class="mt-2">Personal Number</h4>
+                        <div class="mt-2">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-phone text-danger"></i>
+                                </span>
+                                <input type="text" class="form-control border-danger-subtle select-red" name="p_pmobile"
+                                    value="{{prof_amobile}}" placeholder="Enter Personal Number">
+                            </div>
+                        </div>
+                        <h4 class="mt-4">Photo</h4>
+                        <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+
+
+                    </div>
+                    <div class="mt-1" style="display: flex;">
+                        <div class="ml-1 p-1">
+                            <button type="submit" class="btn btn-danger"> Save</button>
+                        </div>
+                        <div class="ml-2 p-1">
+                            <button type="submit" class="btn btn-secondary ml-8"> Cancel</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    {% include 'nav_dashboard.html' %}
+    <img class="img-fluid mt-2 mb-2" id="banner" src="/static/banner.jpg">
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4"> Sign Up </h1>
+        {% include 'form.html' %}
+    </div>
+    <div>
+        {% if error %}
+        <p class="text-danger mt-4">{{ error }}</p>
+        {% endif %}
+    </div>
+    {% include 'footer.html' %}
+
+    <!-- Auto-dismiss script -->
+    <script>
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.auto-dismiss');
+            alerts.forEach(alert => {
+                alert.classList.remove('show');
+                alert.classList.add('hide');
+            });
+        }, 3000); // 3 seconds
+    </script>
+
+</body>
+
+
+
+
+</html>

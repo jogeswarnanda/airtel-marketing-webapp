@@ -1,0 +1,18 @@
+<nav class="navbar shadow-sm bg-body-tertiary fixed-top bg-white">
+    <div>
+        <div class="container ms-0" style="float: left;">
+            <a class="navbar-brand" href="/">
+                <img src="/static/logo.png" alt="Home" width="30" height="24" style="float: left;">
+            </a>
+
+            {% if username %}
+            <h4 class="navbar-nav nav-item ml-2" style="float: left;"> Welcome {{username}}
+            </h4>
+            {% endif %}
+        </div>
+    </div>
+    <img src="/static/blank_profile.jpg" style="height: 50px; float: right; padding: 1px; margin-right: 5px;">
+</nav>
+
+<div style="height: 56px;">
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard - Airtel </title>
+    {% include 'bootstrap.html' %}
+
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        {% include 'sidebar_admin.html' %}
+        <div class="main-content">
+            <br>
+            <div class="container py-5">
+                <h3 class="mb-4">Upload Excel File</h3>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-info">{{ messages[0] }}</div>
+                {% endif %}
+                {% endwith %}
+
+                <form method="POST" action="/upload" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <input type="file" name="file" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Upload</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    {% include 'nav_dashboard.html' %}
+
+    {% include 'footer.html' %}
+
+    <!-- Auto-dismiss script -->
+    <script>
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.auto-dismiss');
+            alerts.forEach(alert => {
+                alert.classList.remove('show');
+                alert.classList.add('hide');
+            });
+        }, 3000); // 3 seconds
+    </script>
+
+</body>
+
+</html>

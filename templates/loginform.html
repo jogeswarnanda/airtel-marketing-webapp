@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center align-items-center">
+    <form method="POST">
+        <div class="mt-4">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-phone text-danger"></i>
+                </span>
+                <input type="text" class="form-control border-danger-subtle select-red" name="mobile"
+                    placeholder="Mobile">
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-key text-danger"></i>
+                </span>
+                <input name="password1" type="password" class="form-control border-danger-subtle select-red"
+                    placeholder="Password">
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-person-workspace text-danger"></i>
+                </span>
+                <select name="role" id="role" class="form-control border-danger-subtle select-red">
+                    <option value="ASC">ASC</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Distributor">Distributor</option>
+                    <option value="XFE">XFE</option>
+                </select>
+
+            </div>
+        </div>
+
+        <br>
+
+        <button class="btn btn-danger" type="submit">Submit</button>
+        <br><br>
+        <p class="text-danger"> Not an User ? <a href="/signup">Sign Up</a></p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show auto-dismiss" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </form>
+</div>
