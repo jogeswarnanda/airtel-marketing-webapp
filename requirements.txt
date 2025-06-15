@@ -1,5 +1,4 @@
 Flask
-libpython3.11-dev
 sqlalchemy
 pymysql
 gunicorn
