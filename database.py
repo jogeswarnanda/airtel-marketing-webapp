@@ -1,8 +1,10 @@
 import sqlalchemy
 from sqlalchemy import create_engine, text
+import os
 print(sqlalchemy.__version__)
 
-db_connection_string =  "mysql+pymysql://4SzmE32uEz5t8DV.root:LCwy8CL3iWqMpxRD@gateway01.ap-southeast-1.prod.aws.tidbcloud.com/test?charset=utf8mb4"
+db_connection_string =  os.getenv('DB_CONNECTION_STRING')
+print("conn str" , db_connection_string)
 
 engine = create_engine(db_connection_string,connect_args={
     "ssl" :{
