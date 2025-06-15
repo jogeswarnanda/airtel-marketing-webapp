@@ -6,15 +6,13 @@ import ssl
 import urllib.request
 print(sqlalchemy.__version__)
 
-context = ssl.create_default_context(cafile=certifi.where())
-response = urllib.request.urlopen("https://example.com", context=context)
 
 db_connection_string =  os.getenv('DB_CONNECTION_STRING')
-print("conn str" , db_connection_string)
+#print("conn str" , db_connection_string)
 
 engine = create_engine(db_connection_string,connect_args={
     "ssl" :{
-        "ca": "/etc/ssl/cert.pem"
+        "ca": "certs/cert.pem"
     }
 })
 
