@@ -3,3 +3,4 @@ pymysql
 gunicorn
 flask_sqlalchemy
 pandas
+certifi
