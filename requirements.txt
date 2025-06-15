@@ -1,4 +1,3 @@
---upgrade pip
 Flask
 pymysql
 gunicorn
