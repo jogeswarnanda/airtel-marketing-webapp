@@ -5,6 +5,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from datetime import datetime
+import sys
 
 db = SQLAlchemy() 
 app = Flask(__name__)
@@ -15,6 +16,8 @@ app.config['SESSION_TYPE'] = 'filesystem'
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+print("ver", sys.version)
 
 # Define the model matching Excel structure
 class UserUpload(db.Model):

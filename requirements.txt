@@ -1,4 +1,4 @@
 Flask
 pymysql
 gunicorn
-sqlalchemy
+flask_sqlalchemy
