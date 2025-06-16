@@ -6,12 +6,12 @@ import ssl
 import urllib.request
 from dotenv import load_dotenv
 load_dotenv()
-print(sqlalchemy.__version__)
+#print(sqlalchemy.__version__)
 
 db_connection_string =  os.getenv('DB_CONNECTION_STRING')
-print("conn str" , db_connection_string)
+#print("conn str" , db_connection_string)
 db_s_string =  os.getenv('DB_SIKAN')
-print("conn str sk" , db_s_string)
+#print("conn str sk" , db_s_string)
 
 engine = create_engine(db_connection_string,connect_args={
     "ssl" :{
@@ -45,7 +45,7 @@ def verify_login (signup_mobile,data,found_stat,dbpwd,name,role,amobile):
     #print(rows[0][4])
     if len(rows) == 0:
       found_stat = "N"
-      print("set found sta N:")
+      #print("set found sta N:")
       return found_stat,dbpwd,name,role,amobile
     else:
       print("set found stat YY")
@@ -54,7 +54,7 @@ def verify_login (signup_mobile,data,found_stat,dbpwd,name,role,amobile):
       name = rows[0][1]
       role = rows[0][3]
       amobile = rows[0][4]
-      print("pwd", dbpwd)
+      #print("pwd", dbpwd)
       return found_stat,dbpwd,name,role,amobile
 
 def add_user_to_db(data):
@@ -71,7 +71,7 @@ def fetch_upload_data (s_mobile):
     result = conn.execute(text("SELECT * FROM user_uploads where upload_mobile = :f_mobile"), {"f_mobile" : f_mobile});
     columns = ["Month","MNP","FWA","JioMNP","MDSSO","Sim Billing"]
     rows_all = result.fetchall()
-    print("rows_all", rows_all)
+    #print("rows_all", rows_all)
     for row in rows_all:
       rows_s = (row.upload_month,row.upload_mnp,row.upload_fwa,row.upload_jmnp,row.upload_mdsso,row.upload_simbilling)
       list_all.append(rows_s)
@@ -80,8 +80,8 @@ def fetch_upload_data (s_mobile):
 
 def upload_data(upload):
   uploadid = upload.upload_id
-  print("upload db", upload)
-  print("upload db", upload.upload_id)
+  #print("upload db", upload)
+  #print("upload db", upload.upload_id)
   with engine.connect() as conn:
     result = conn.execute(text("SELECT * FROM user_uploads where upload_id = :uploadid1"),
            {"uploadid1" : uploadid});
@@ -92,8 +92,8 @@ def upload_data(upload):
       conn.commit()
 
     else:
-      print("update ", upload.upload_id)
-      print("update ", upload.upload_mnp)
+      #print("update ", upload.upload_id)
+      #print("update ", upload.upload_mnp)
 
       result1 = conn.execute(text("""
       UPDATE user_uploads
@@ -123,7 +123,7 @@ def upload_data(upload):
       })
       conn.commit()
 def update_user_to_db(data):
-  print("in update profile db", data)
+  #print("in update profile db", data)
   with engine.connect() as conn:
     result1 = conn.execute(text("""
       UPDATE users
@@ -139,9 +139,10 @@ def update_user_to_db(data):
       })
     conn.commit()
 
-def db_leader_board():
+def db_leader_board(month):
+  print("in db_leader_board", month)
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM user_uploads where upload_month = :u_month"), {"u_month" : "April"});
+    result = conn.execute(text("SELECT * FROM user_uploads where upload_month = :u_month"), {"u_month" : month});
     columns = ["Month","MNP","FWA","JioMNP","MDSSO","Sim Billing"]
     rows_all = result.fetchall()
     print("rows_all", rows_all)

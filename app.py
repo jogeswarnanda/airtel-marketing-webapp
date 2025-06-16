@@ -40,9 +40,10 @@ class UserUpload(db.Model):
     upload_simbilling = db.Column(db.Integer)
 
 
-@app.route("/")
-def hello_airtel():
-    return render_template('home.html')
+#@app.route("/")
+#def hello_airtel():
+#    return login_page()
+    #return render_template('login.html')
 
 @app.route("/signup/",methods=['GET', 'POST'])
 def signup_page():
@@ -85,7 +86,7 @@ def signup_page():
                 return redirect(url_for('signup_page'))
     return render_template('signup.html')
 
-@app.route("/login/",methods=['GET', 'POST'])
+@app.route("/",methods=['GET', 'POST'])
 def login_page():
     print("in login render")
     if request.method == 'POST':
@@ -269,12 +270,13 @@ def leader_board():
     now = datetime.now()
     current_year = now.year
     current_month = now.strftime('%B')
+    print("current month", current_month)
     month_last1 = now - relativedelta(months=1)
     month_last2 = now - relativedelta(months=2)
     print("cur month", current_month)
     print("last ", month_last1.strftime('%B'))
     print("prev m :", month_last2.strftime('%B'))
-    list1 = db_leader_board()
+    list1 = db_leader_board(current_month)
     print("list main page :",list1)
     name_dash = "Leader Board"
 
@@ -292,67 +294,69 @@ def leader_board():
     print(f"sorted res len::", l1)
     
     columns = ["MNP","FWA","JioMNP","MDSSO","Sim Billing"]
-    rows =  [("1","2","3","4","5")]
+    rows_jog =  [(1,2,3,4,5)]
     name1 = " "
     name2 = " "
     name3 = " "
     name4 = " "
     name5 = " "
+    res1 = " "
+    res2 = " "
+    res3 = " "
+    res4 = " "
+    res5 = " "
     i =l1
     j = l1
     if i > 0:
         name1 = sorted_results[l1-j][0]
-        row_name1 = []
-        test = []
-        rowa = sorted_results[l1-j][2]
-        print("name1>>::", name1)
-        print("rowa ::", type(rowa))
-        row_name1  = (list(rowa))
-        print("name111>>::", row_name1)
-        for row in row_name1:
-            test.append(str(row))
-            print("rrr", row)
-        print("tst", test)
-        for row in test:
-            print("ttt", row)
+        row1 = sorted_results[l1-j][2]
+        row_name1  = (list(row1))
+        res1 = [tuple(row_name1)]
+        print ("res1", res1)
+        #print("name1>>::", name1)
+        #print("rowa ::", type(rowa))
+        #print("rowa ::", rowa)
 
-
-        #row_name1  = [1,2,3,4,5]
+        #print("name111>>::", row_name1)
+        #for row in row_name1:
+        #    test.append(str(row))
+        #    print("rrr", row)
+        #print("tst", test)
         i     = i - 1
         j     = j -1
     if i > 0:
         name2 = sorted_results[l1-j][0]
         row2 = sorted_results[l1-j][2]
+        row_name2  = (list(row2))
+        res2 = [tuple(row_name2)]
         i  = i - 1
-        j = j -1
+        j  = j -1
         
     if i > 0:
         name3 = sorted_results[l1-j][0]
         row3 = sorted_results[l1-j][2]
+        row_name3  = (list(row3))
+        res3 = [tuple(row_name3)]
         i  = i - 1
         j = j -1
     if i > 0:
         name4 = sorted_results[l1-j][0]
         row4 = sorted_results[l1-j][2]
+        row_name4  = (list(row4))
+        res4 = [tuple(row_name4)]
         i  = i - 1
         j = j -1
     if i > 0:
         name5 = sorted_results[l1-j][0]
         row5 = sorted_results[l1-j][2]
+        row_name5  = (list(row5))
+        res5 = [tuple(row_name5)]
         i  = i - 1
         j = j -1
 
-    print("n1 ::", name1)
-    print(list1)
-    print("n2 ::", name2)
-    print("n3 ::", name3)
-    print("n4 ::", name4)
-    print("n5 ::", name5)
-
-
     #print(f"n2 ::", sorted_results[4][0])
 
-    return render_template('leaderboard.html',columns=columns,username=name_dash,name1=name1,name2=name2,name3=name3,rows=sorted_results)
+    return render_template('leaderboard.html',columns=columns,username=name_dash,name1=name1,name2=name2,name3=name3,row1=res1,row2=res2,row3=res3,row4=res4,row5=res5)
 
 print(__name__)
 if __name__ == "__main__":

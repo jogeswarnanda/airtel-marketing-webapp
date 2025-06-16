@@ -22,7 +22,7 @@
                         <div class="py-1">
                             <div class="card rounded-4 shadow-sm">
                                 <div class="card-body">
-                                    {% if rows %}
+                                    {% if row1 %}
                                     <table class="table table-bordered table-hover table-striped align-middle">
                                         <thead class="table-dark">
                                             <tr>
@@ -32,7 +32,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for row in rows %}
+                                            {% for row in row1 %}
                                             <tr>
                                                 {% for cell in row %}
                                                 <td>{{ cell }}</td>
@@ -62,7 +62,7 @@
                         <div class="py-1">
                             <div class="card rounded-4 shadow-sm">
                                 <div class="card-body">
-                                    {% if rows %}
+                                    {% if row2 %}
                                     <table class="table table-bordered table-hover table-striped align-middle">
                                         <thead class="table-dark">
                                             <tr>
@@ -72,7 +72,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for row in rows %}
+                                            {% for row in row2 %}
                                             <tr>
                                                 {% for cell in row %}
                                                 <td>{{ cell }}</td>
@@ -103,7 +103,7 @@
                         <div class="py-1">
                             <div class="card rounded-4 shadow-sm">
                                 <div class="card-body">
-                                    {% if row1 %}
+                                    {% if row3 %}
                                     <table class="table table-bordered table-hover table-striped align-middle">
                                         <thead class="table-dark">
                                             <tr>
@@ -113,7 +113,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for row in rows %}
+                                            {% for row in row3 %}
                                             <tr>
                                                 {% for cell in row %}
                                                 <td>{{ cell }}</td>
@@ -142,7 +142,7 @@
                         <div class="py-1">
                             <div class="card rounded-4 shadow-sm">
                                 <div class="card-body">
-                                    {% if rows %}
+                                    {% if row4 %}
                                     <table class="table table-bordered table-hover table-striped align-middle">
                                         <thead class="table-dark">
                                             <tr>
@@ -152,7 +152,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for row in rows %}
+                                            {% for row in row4 %}
                                             <tr>
                                                 {% for cell in row %}
                                                 <td>{{ cell }}</td>
@@ -168,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    <h6>Name4
+                    <h6>{{name4}}
                     </h6>
                 </div>
                 <br>
@@ -181,7 +181,7 @@
                         <div class="py-1">
                             <div class="card rounded-4 shadow-sm">
                                 <div class="card-body">
-                                    {% if rows %}
+                                    {% if row5 %}
                                     <table class="table table-bordered table-hover table-striped align-middle">
                                         <thead class="table-dark">
                                             <tr>
@@ -191,7 +191,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for row in rows %}
+                                            {% for row in row5 %}
                                             <tr>
                                                 {% for cell in row %}
                                                 <td>{{ cell }}</td>
@@ -207,15 +207,15 @@
                             </div>
                         </div>
                     </div>
-                    <h6>Name5
+                    <h6>{{name5}}
                     </h6>
                 </div>
 
             </div>
-
-
         </div>
     </div>
+
+
     {% include 'nav_dashboard.html' %}
     {% include 'footer.html' %}
 
