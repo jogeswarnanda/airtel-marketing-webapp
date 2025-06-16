@@ -1,14 +1,19 @@
 from flask import Flask, render_template,request, redirect, flash, url_for,session
-from database import verify_login,add_user_to_db,fetch_upload_data,upload_data,update_user_to_db
+from database import verify_login,add_user_to_db,fetch_upload_data,upload_data,update_user_to_db,db_leader_board
 import pandas as pd
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import sys
+from dotenv import load_dotenv
 
+load_dotenv()
 db = SQLAlchemy() 
 app = Flask(__name__)
+
+
 
 app.secret_key = 'your_secret_key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -124,7 +129,7 @@ def login_page():
     
 @app.route("/userdashboard/")
 def user_dashboard():
-    dash_name = session['username']
+    dash_name = session['username'] + "-" + "Dashboard"
     mobile = session['mobile'] 
     print("in user dashboard")
     print("seeess mob", session['mobile'])
@@ -178,6 +183,14 @@ def upload_file():
         # Iterate and insert into DB
         now = datetime.now()
         current_year = now.year
+        current_month = now.month
+        month_last1 = now - relativedelta(months=1)
+        month_last2_= now - relativedelta(months=2)
+        print(current_month)
+        print(month_last1)
+        print(month_last1)
+
+
             
         for _, row in df.iterrows():
             print("excel rows ")
@@ -215,6 +228,7 @@ def update_profile():
     print("seeess name", session['username'])
     #fetch_update_user(mobile)
     #print("name", username)
+    dash_name = "Welcome, " + session['username'] 
     amobile = " "   
     data = " "
     found_stat = 'N'
@@ -247,8 +261,98 @@ def update_profile():
             return redirect(url_for('update_profile'))
             
     return render_template('updateprofile.html',prof_name=prof_name,prof_mobile=prof_mobile,
-                           prof_amobile=prof_amobile)
+                           prof_amobile=prof_amobile,username=dash_name)
 
+
+@app.route("/leaderboard/")
+def leader_board():
+    now = datetime.now()
+    current_year = now.year
+    current_month = now.strftime('%B')
+    month_last1 = now - relativedelta(months=1)
+    month_last2 = now - relativedelta(months=2)
+    print("cur month", current_month)
+    print("last ", month_last1.strftime('%B'))
+    print("prev m :", month_last2.strftime('%B'))
+    list1 = db_leader_board()
+    print("list main page :",list1)
+    name_dash = "Leader Board"
+
+    results = []
+    for person in list1:
+        name = person[0]
+        marks = person[1:]
+        total = sum(marks)
+        results.append((name, total, marks))
+    sorted_results = sorted(results, key=lambda x: x[1], reverse=True)
+    l1= len(sorted_results)
+
+    
+    print(f"sorted res ::", sorted_results)
+    print(f"sorted res len::", l1)
+    
+    columns = ["MNP","FWA","JioMNP","MDSSO","Sim Billing"]
+    rows =  [("1","2","3","4","5")]
+    name1 = " "
+    name2 = " "
+    name3 = " "
+    name4 = " "
+    name5 = " "
+    i =l1
+    j = l1
+    if i > 0:
+        name1 = sorted_results[l1-j][0]
+        row_name1 = []
+        test = []
+        rowa = sorted_results[l1-j][2]
+        print("name1>>::", name1)
+        print("rowa ::", type(rowa))
+        row_name1  = (list(rowa))
+        print("name111>>::", row_name1)
+        for row in row_name1:
+            test.append(str(row))
+            print("rrr", row)
+        print("tst", test)
+        for row in test:
+            print("ttt", row)
+
+
+        #row_name1  = [1,2,3,4,5]
+        i     = i - 1
+        j     = j -1
+    if i > 0:
+        name2 = sorted_results[l1-j][0]
+        row2 = sorted_results[l1-j][2]
+        i  = i - 1
+        j = j -1
+        
+    if i > 0:
+        name3 = sorted_results[l1-j][0]
+        row3 = sorted_results[l1-j][2]
+        i  = i - 1
+        j = j -1
+    if i > 0:
+        name4 = sorted_results[l1-j][0]
+        row4 = sorted_results[l1-j][2]
+        i  = i - 1
+        j = j -1
+    if i > 0:
+        name5 = sorted_results[l1-j][0]
+        row5 = sorted_results[l1-j][2]
+        i  = i - 1
+        j = j -1
+
+    print("n1 ::", name1)
+    print(list1)
+    print("n2 ::", name2)
+    print("n3 ::", name3)
+    print("n4 ::", name4)
+    print("n5 ::", name5)
+
+
+    #print(f"n2 ::", sorted_results[4][0])
+
+    return render_template('leaderboard.html',columns=columns,username=name_dash,name1=name1,name2=name2,name3=name3,rows=sorted_results)
 
 print(__name__)
 if __name__ == "__main__":

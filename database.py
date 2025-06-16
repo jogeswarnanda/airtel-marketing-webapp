@@ -4,11 +4,14 @@ import os
 import certifi
 import ssl
 import urllib.request
+from dotenv import load_dotenv
+load_dotenv()
 print(sqlalchemy.__version__)
 
-
 db_connection_string =  os.getenv('DB_CONNECTION_STRING')
-#print("conn str" , db_connection_string)
+print("conn str" , db_connection_string)
+db_s_string =  os.getenv('DB_SIKAN')
+print("conn str sk" , db_s_string)
 
 engine = create_engine(db_connection_string,connect_args={
     "ssl" :{
@@ -136,9 +139,19 @@ def update_user_to_db(data):
       })
     conn.commit()
 
-
-
-
+def db_leader_board():
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM user_uploads where upload_month = :u_month"), {"u_month" : "April"});
+    columns = ["Month","MNP","FWA","JioMNP","MDSSO","Sim Billing"]
+    rows_all = result.fetchall()
+    print("rows_all", rows_all)
+    curr_month_list = []
+    for row in rows_all:
+      rows_s = (row.upload_name,row.upload_mnp,row.upload_fwa,row.upload_jmnp,row.upload_mdsso,row.upload_simbilling)
+      print("rows_s", rows_s)
+      curr_month_list.append(rows_s)
+  
+  return curr_month_list
 
 #result_dict1 = dict()
 #result_dict1 = dict(result_dict.key)

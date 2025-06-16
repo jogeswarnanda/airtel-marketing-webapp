@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard - Airtel </title>
+    {% include 'bootstrap.html' %}
+</head>
+
+<body>
+
+    <div class="wrapper">
+        {% include 'sidebar.html' %}
+        <div class="main-content">
+            <br>
+            <h4 class="text-center mb-4 section_heading rounded"> PERFORMANCE </h4>
+            <div class="col-3 mt-2">
+                <div>
+                    <div style="display: flex;">
+                        <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        <img src="/static/rank1_.png"
+                            style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
+                        <div class="py-1">
+                            <div class="card rounded-4 shadow-sm">
+                                <div class="card-body">
+                                    {% if rows %}
+                                    <table class="table table-bordered table-hover table-striped align-middle">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                {% for col in columns %}
+                                                <th>{{ col }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in rows %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="text-muted">No data found.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h6> {{name1}}
+                    </h6>
+                </div>
+                <br>
+
+                <div>
+                    <div style="display: flex;">
+                        <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        <img src="/static/rank2.png"
+                            style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
+                        <div class="py-1">
+                            <div class="card rounded-4 shadow-sm">
+                                <div class="card-body">
+                                    {% if rows %}
+                                    <table class="table table-bordered table-hover table-striped align-middle">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                {% for col in columns %}
+                                                <th>{{ col }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in rows %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="text-muted">No data found.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        </p>
+                    </div>
+                    <h6>{{name2}}
+                    </h6>
+                </div>
+                <br>
+
+                <div>
+                    <div style="display: flex;">
+                        <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        <img src="/static/rank3.png"
+                            style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
+                        <div class="py-1">
+                            <div class="card rounded-4 shadow-sm">
+                                <div class="card-body">
+                                    {% if row1 %}
+                                    <table class="table table-bordered table-hover table-striped align-middle">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                {% for col in columns %}
+                                                <th>{{ col }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in rows %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="text-muted">No data found.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h6>{{name3}}
+                    </h6>
+                </div>
+                <br>
+                <div>
+                    <div style="display: flex;">
+                        <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        <img src="/static/rank4.png"
+                            style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
+                        <div class="py-1">
+                            <div class="card rounded-4 shadow-sm">
+                                <div class="card-body">
+                                    {% if rows %}
+                                    <table class="table table-bordered table-hover table-striped align-middle">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                {% for col in columns %}
+                                                <th>{{ col }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in rows %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="text-muted">No data found.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6>Name4
+                    </h6>
+                </div>
+                <br>
+
+                <div>
+                    <div style="display: flex;">
+                        <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        <img src="/static/rank5.png"
+                            style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
+                        <div class="py-1">
+                            <div class="card rounded-4 shadow-sm">
+                                <div class="card-body">
+                                    {% if rows %}
+                                    <table class="table table-bordered table-hover table-striped align-middle">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                {% for col in columns %}
+                                                <th>{{ col }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in rows %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="text-muted">No data found.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6>Name5
+                    </h6>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    {% include 'nav_dashboard.html' %}
+    {% include 'footer.html' %}
+
+    <!-- Auto-dismiss script -->
+    <script>
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.auto-dismiss');
+            alerts.forEach(alert => {
+                alert.classList.remove('show');
+                alert.classList.add('hide');
+            });
+        }, 3000); // 3 seconds
+    </script>
+
+</body>
+
+</html>
