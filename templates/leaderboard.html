@@ -12,11 +12,15 @@
         {% include 'sidebar.html' %}
         <div class="main-content">
             <br>
-            <h4 class="text-center mb-4 section_heading rounded"> PERFORMANCE </h4>
+            <h4 class="text-center mb-4 section_heading rounded"> {{cm}}</h4>
             <div class="col-3 mt-2">
                 <div>
                     <div style="display: flex;">
+                        {% if pic1 %}
+                        <img src="{{pic1}}" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% else %}
                         <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% endif %}
                         <img src="/static/rank1_.png"
                             style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
                         <div class="py-1">
@@ -56,7 +60,12 @@
 
                 <div>
                     <div style="display: flex;">
+                        {% if pic2 %}
+                        <img src="{{pic2}}" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% else %}
                         <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% endif %}
+
                         <img src="/static/rank2.png"
                             style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
                         <div class="py-1">
@@ -97,7 +106,13 @@
 
                 <div>
                     <div style="display: flex;">
+                        {% if pic3 %}
+                        <img src="{{pic3}}" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% else %}
                         <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% endif %}
+
+
                         <img src="/static/rank3.png"
                             style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
                         <div class="py-1">
@@ -136,7 +151,11 @@
                 <br>
                 <div>
                     <div style="display: flex;">
+                        {% if pic4 %}
+                        <img src="{{pic4}}" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% else %}
                         <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% endif %}
                         <img src="/static/rank4.png"
                             style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
                         <div class="py-1">
@@ -175,7 +194,11 @@
 
                 <div>
                     <div style="display: flex;">
+                        {% if pic5 %}
+                        <img src="{{pic5}}" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% else %}
                         <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% endif %}
                         <img src="/static/rank5.png"
                             style="height: 150px; padding: 1px; margin-right: 5px; margin-left:-80px; margin-top: -70px;">
                         <div class="py-1">
@@ -214,8 +237,6 @@
             </div>
         </div>
     </div>
-
-
     {% include 'nav_dashboard.html' %}
     {% include 'footer.html' %}
 

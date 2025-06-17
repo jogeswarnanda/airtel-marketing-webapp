@@ -44,6 +44,7 @@
                             </div>
                         </div>
                         <h4 class="mt-2">Personal Number</h4>
+
                         <div class="mt-2">
                             <div class="input-group">
                                 <span class="input-group-text">
@@ -53,24 +54,44 @@
                                     value="{{prof_amobile}}" placeholder="Enter Personal Number">
                             </div>
                         </div>
+
+                        <div class="mt-4" style="display: flex;">
+                            <div class="ml-1 p-1">
+                                <button type="submit" class="btn btn-danger" value="savedata" name="save"> Save</button>
+                            </div>
+                            <div class="ml-2 p-1">
+                                <button type="submit" class="btn btn-secondary ml-8" value="cancel" name="cancel">
+                                    Cancel</button>
+                            </div>
+                        </div>
                         <h4 class="mt-4">Photo</h4>
+                        {% if prof_pic %}
+                        <img src="{{prof_pic}}" style="height: 150px; padding: 1px; margin-right: 5px;">
+                        {% else %}
                         <img src="/static/blank_profile.jpg" style="height: 150px; padding: 1px; margin-right: 5px;">
-
-
+                        {% endif %}
                     </div>
-                    <div class="mt-1" style="display: flex;">
-                        <div class="ml-1 p-1">
-                            <button type="submit" class="btn btn-danger"> Save</button>
-                        </div>
-                        <div class="ml-2 p-1">
-                            <button type="submit" class="btn btn-secondary ml-8"> Cancel</button>
-                        </div>
-                    </div>
-                </form>
-
             </div>
+            </form>
+            <form method="POST" action="/updateprofile" enctype="multipart/form-data">
+                <div class="mb-3 input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-file-earmark-image text-danger"></i>
+                    </span>
+                    <input type="file" name="file" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-danger" value="changepic" name="upic">Upload</button>
+            </form>
+
+
+            <!--form method="POST" enctype="multipart/form-data" action="/uploadpic">
+                    <label>Picture: <input type="file" name="profile_pic" accept="image/*" required></label><br><br>
+                    <button type="submit" class="btn btn-secondary ml-8"> Upload!</button>
+                </form-->
 
         </div>
+
+    </div>
     </div>
     {% include 'nav_dashboard.html' %}
     <img class="img-fluid mt-2 mb-2" id="banner" src="/static/banner.jpg">

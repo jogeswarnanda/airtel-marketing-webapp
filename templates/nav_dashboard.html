@@ -11,7 +11,12 @@
             {% endif %}
         </div>
     </div>
+    {% if prof_pic %}
+    <img src="{{prof_pic}}" style="height: 50px; float: right; padding: 1px; margin-right: 5px;">
+    {% else %}
     <img src="/static/blank_profile.jpg" style="height: 50px; float: right; padding: 1px; margin-right: 5px;">
+    {% endif %}
+
 </nav>
 
 <div style="height: 56px;">

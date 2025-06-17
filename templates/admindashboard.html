@@ -8,8 +8,6 @@
 </head>
 
 <body>
-
-
     <div class="wrapper">
         {% include 'sidebar_admin.html' %}
         <div class="main-content">
@@ -23,13 +21,39 @@
                 {% endwith %}
 
                 <form method="POST" action="/upload" enctype="multipart/form-data">
-                    <div class="mb-3">
+                    <div class="mb-3 input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-file-earmark-image text-danger"></i>
+                        </span>
                         <input type="file" name="file" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-danger">Upload</button>
+                    <button type="submit" class="btn btn-danger" name="upload" value="upload">Upload</button>
                 </form>
-            </div>
 
+                <h3 class="mt-4">Manage Users</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role/th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <form method="POST">
+
+                                <td><input type="text" name="name" value="{{ user[1] }}"></td>
+                                <td><input type="email" name="role" value="{{ user[2] }}"></td>
+                                <td><input type="text" name="password" value="{{ user[3] }}"></td>
+                                <td><button type="submit" name="update" value="update">Update</button></td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
