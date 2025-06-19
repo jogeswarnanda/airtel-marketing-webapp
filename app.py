@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request, redirect, flash, url_for,session
-from database import verify_login,add_user_to_db,fetch_upload_data,upload_data,update_user_to_db,db_leader_board,upload_pic_to_db
+from database import verify_login,add_user_to_db,fetch_upload_data,upload_data,update_user_to_db,db_leader_board,admin_update
 import pandas as pd
 import os
 from flask_sqlalchemy import SQLAlchemy
@@ -160,21 +160,54 @@ def admin_dashboard():
     if 'username' not in session:
         flash("Please login first!", "warning")
         return redirect(url_for('login_page'))
+    #elif request.method == 'POST':  
+       #    print("in admin dashboard post")
+       #    dash_name = session['username'] 
+       #    admin_option = 's'
+       #    data = request.form 
     else:
         dash_name = session['username']
-        mobile = session['mobile'] 
-        print("in admin dashboard")
-        print("seeess mob", session['mobile'])
-        columns, rows = fetch_upload_data(mobile)
+        users           = " "
+        mobile          = " "
+        if ( request.method == 'POST' ) and request.form.get('update'):
+            print("in admin dashboard post update")
+            users = request.form
+            print("users bef updated in admin", users)
+            admin_option = 'u'
+            users_updated = admin_update(users,admin_option,mobile)
+            print("users updated in admin", users_updated)
+            flash("User Data Updated !", "success")
+            users = " "
+            mobile = " "
+            admin_option = 's'
+            users_updated2 = admin_update(users,admin_option,mobile)
+            for user in users_updated2:
+                print("user in admin", user)
+            return render_template('admindashboard.html',username=dash_name,users =users_updated2)
+            
+            #return render_template('admindashboard.html',username=dash_name,users =users_updated)
+         
+        elif ( request.method == 'POST' ):
+            print("in admin dashboard get")
+            #print("request.method",request.method)
+            #dash_name = session['username']
+            #mobile = session['mobile'] 
+            #print("in admin dashboard")
+            #print("seeess mob", session['mobile'])
+            admin_option = 's'
+            users_updated = admin_update(users,admin_option,mobile)
+            for user in users_updated:
+                print("user in admin", user)
+            return render_template('admindashboard.html',username=dash_name,users =users_updated)
+    
         #print("name", username)
-       ##    name = request.form['name']
+        #    name = request.form['name']
         #    role = request.form['role']
         #    password = request.form['password']
         #    db_admin_update(mobile)
-
-        return render_template('admindashboard.html',username=dash_name)
+        #    return redirect(url_for('admindashboard'))
+        #return render_template('admindashboard.html',username=dash_name)
      
-
 #Logout route
 @app.route("/logout/", methods=['GET', 'POST'])
 def logout_page():

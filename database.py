@@ -63,7 +63,7 @@ def verify_login (signup_mobile,data,found_stat,dbpwd,name,role,amobile,pic):
 def add_user_to_db(data):
   with engine.connect() as conn:
     result1 = conn.execute(text("INSERT INTO users (user_mobile,user_name,user_password,user_role,user_alt_number) VALUES(:u_mobile,:u_name,:u_password,:u_role,:u_alt_number)"),
-    {"u_mobile": data.get("s_mobile"), "u_name" : data.get("s_name"),"u_password" : data.get("s_password"),"u_role" : data.get("s_role",),"u_alt_number" : data.get("s_alt_number")});
+    {"u_mobile": data.get("s_mobile"), "u_name" : data.get("s_name"),"u_password" : data.get("s_password"),"u_role" : data.get("s_role",),"u_alt_number" : 0});
     conn.commit()
 
 def fetch_upload_data (s_mobile):
@@ -141,11 +141,35 @@ def update_user_to_db(data):
       })
     conn.commit()
 
-#def admin_update(mobile):
-##  with engine.connect() as conn:
- #   cursor = conn.cursor()
- ##   cursor.execute("""
-  #  UPDATE users SET name = %s, email = %s, user_mobile = %s WHERE id = %s
+def admin_update(users,admin_option,mobile):
+  if admin_option == "s":
+    with engine.connect() as conn:
+      result =conn.execute(text("SELECT user_name, user_mobile, user_password, user_role,user_alt_number FROM users"))
+      users = result.fetchall()
+      #cursor.close()
+      return users
+  elif admin_option == "u": 
+    with engine.connect() as conn:
+      result1 = conn.execute(text("""
+      UPDATE users
+      SET
+        user_name       = :u_name,
+        user_password   = :u_password,
+        user_role       = :u_role,
+        user_alt_number = :u_alt_number
+        WHERE user_mobile = :u_mobile
+        """),
+      {
+        "u_name"      : users.get("f_name"),
+        "u_password"  : users.get("f_password"),
+        "u_role"      : users.get("f_role"),
+        "u_alt_number": users.get("f_altnumber"),
+        "u_mobile"    : users.get("f_mobile")
+      
+      })
+      conn.commit()
+      return users
+  
   #  """, (name, email, mobile, user_id))
  # mysql.connection.commit()
  # cursor.close()

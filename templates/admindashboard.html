@@ -35,19 +35,28 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Role/th>
+                            <th>Mobile</th>
                             <th>Password</th>
+                            <th>Role</th>
+                            <th>Alt Number</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for user in users %}
                         <tr>
-                            <form method="POST">
-
-                                <td><input type="text" name="name" value="{{ user[1] }}"></td>
-                                <td><input type="email" name="role" value="{{ user[2] }}"></td>
-                                <td><input type="text" name="password" value="{{ user[3] }}"></td>
-                                <td><button type="submit" name="update" value="update">Update</button></td>
+                            <form method="POST" action="/admindashboard">
+                                <td><input type="text" class="form-control border-danger-subtle select-red"
+                                        name="f_name" value="{{ user.user_name }}"></td>
+                                <td><input type="text" class="form-control border-danger-subtle select-red"
+                                        name="f_mobile" value="{{ user.user_mobile }}"></td>
+                                <td><input type="text" class="form-control border-danger-subtle select-red"
+                                        name="f_password" value="{{ user[2] }}"></td>
+                                <td><input type="text" class="form-control border-danger-subtle select-red"
+                                        name="f_role" value="{{ user[3] }}"></td>
+                                <td><input type="text" class="form-control border-danger-subtle select-red"
+                                        name="f_altnumber" value="{{ user[4] }}"></td>
+                                <td><button type="submit" class="btn btn-danger" name="update"
+                                        value="update">Update</button></td>
                             </form>
                         </tr>
                         {% endfor %}
@@ -58,7 +67,6 @@
     </div>
 
     {% include 'nav_dashboard.html' %}
-
     {% include 'footer.html' %}
 
     <!-- Auto-dismiss script -->
