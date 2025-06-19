@@ -145,14 +145,93 @@ def user_dashboard():
         return redirect(url_for('login_page'))
     else:
         dash_name = session['username'] + "-" + "Dashboard"
-        mobile    = session['mobile'] 
-        print("in user dashboard")
-        print("seeess mob", session['mobile'])
+        mobile    = session['mobile']
+        session_mobile = mobile
+        print("in user dashboard", mobile)
+        #print("seeess mob", session['mobile'])
         columns, rows = fetch_upload_data(mobile)
         pic = session['pic'] 
-        print("pic >>", pic)
-        #print("name", username)
-        return render_template('userdashboard.html',username=dash_name,columns=columns,rows=rows,prof_pic=pic)
+        #print("pic >>", pic)
+        #RANKING ::
+        now = datetime.now()
+        current_year = now.year
+        current_month = now.strftime('%B')
+        cm=current_month
+        #print("current month", current_month)
+        month_l1 = now - relativedelta(months=1)
+        month_l2 = now - relativedelta(months=2)
+        month_last1 = month_l1.strftime('%B')
+        month_last2 = month_l2.strftime('%B')
+        #print("cur month", current_month)
+        #print("last ", month_last1.strftime('%B'))
+        #print("prev m :", month_last2.strftime('%B'))
+        
+        #print("list main page :",list1)
+        pic = session['pic']
+        #print("pic:", pic)
+        list1 = db_leader_board(current_month)
+        results   = []
+        for person in list1:
+            mobile = person[0]
+            name   = person[1]
+            marks  = person[2:]
+            total = sum(marks)
+            results.append((mobile, name, total, marks))
+        sorted_results1 = sorted(results, key=lambda x: x[2], reverse=True)
+        l1 = len(sorted_results1)
+
+        list2 = db_leader_board(month_last1)
+        results   = []
+        for person in list2:
+            mobile = person[0]
+            name   = person[1]
+            marks  = person[2:]
+            total = sum(marks)
+            results.append((mobile, name, total, marks))
+        sorted_results2 = sorted(results, key=lambda x: x[2], reverse=True)
+        l2 = len(sorted_results2)
+
+        list3 = db_leader_board(month_last2)
+        results   = []
+        for person in list3:
+            mobile = person[0]
+            name   = person[1]
+            marks  = person[2:]
+            total = sum(marks)
+            results.append((mobile, name, total, marks))
+        sorted_results3 = sorted(results, key=lambda x: x[2], reverse=True)
+        l3 = len(sorted_results3)
+        
+        print(f"session_mobile:" , session_mobile)
+        print(f"sorted res curr month::", sorted_results1)
+        print(f"sorted res len::", l1)
+
+        #position1
+        position1 = position = next((i for i, entry in enumerate(sorted_results1) if entry[0] == session_mobile), -1)
+        position1 = position1 + 1  # To make it 1-based index
+        print(f"position in curr month::", position1)
+
+        print(f"sorted res last month::", sorted_results2)
+        print(f"sorted res len::", l2)
+        #position2 
+        position2 = position = next((i for i, entry in enumerate(sorted_results2) if entry[0] == session_mobile), -1)
+        position2 = position2 + 1  # To make it 1-based index
+        print(f"position in prev month::", position2)
+
+        print(f"sorted res last month::", sorted_results3)
+        print(f"sorted res len::", l3)
+        
+
+        #position3  
+        position3 = position = next((i for i, entry in enumerate(sorted_results3) if entry[0] == session_mobile), -1)
+        position3 = position3 + 1  # To make it 1-based index
+        print(f"position in prev prev month::", position3)
+
+        r_columns  = [month_last2, month_last1, current_month]
+        r_rows     = [(str(position3),str(position2),str(position1))] 
+
+
+        return render_template('userdashboard.html',username=dash_name,columns=columns,rows=rows,prof_pic=pic,r_columns=r_columns,r_rows=r_rows)
 
 
 @app.route("/admindashboard/", methods=['GET', 'POST'])
@@ -187,7 +266,7 @@ def admin_dashboard():
             
             #return render_template('admindashboard.html',username=dash_name,users =users_updated)
          
-        elif ( request.method == 'POST' ):
+        else:
             print("in admin dashboard get")
             #print("request.method",request.method)
             #dash_name = session['username']

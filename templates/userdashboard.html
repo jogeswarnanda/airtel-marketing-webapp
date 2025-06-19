@@ -16,9 +16,9 @@
 
             <div class="container py-2">
                 <div class="card rounded-4 shadow-sm">
-                    <div class="card-header bg-primary text-white rounded-top-4">
+                    <!--div class="card-header bg-primary text-white rounded-top-4">
                         <h4 class="mb-0">User Data Table</h4>
-                    </div>
+                    </div-->
                     <div class="card-body">
                         {% if rows %}
                         <table class="table table-bordered table-hover table-striped align-middle">
@@ -47,6 +47,36 @@
             </div>
 
             <h4 class="text-center mt-4 mb-4 section_heading rounded"> RANKING </h4>
+
+            <div class="container py-2">
+                <div class="card rounded-4 shadow-sm">
+
+                    <div class="card-body">
+                        {% if r_rows %}
+                        <table class="table table-bordered table-hover table-striped align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    {% for col in r_columns %}
+                                    <th>{{ col }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in r_rows %}
+                                <tr>
+                                    {% for cell in row %}
+                                    <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-muted">No data found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
