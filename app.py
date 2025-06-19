@@ -227,7 +227,7 @@ def user_dashboard():
         position3 = position3 + 1  # To make it 1-based index
         print(f"position in prev prev month::", position3)
 
-        r_columns  = [month_last2, month_last1, current_month]
+        r_columns  = [month_last2, month_last1, current_month+"(MTD)"]
         r_rows     = [(str(position3),str(position2),str(position1))] 
 
 
