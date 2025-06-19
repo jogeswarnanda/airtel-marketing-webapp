@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+    .main-content {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+</style>
+
 <head>
     <title>Dashboard - Airtel </title>
     {% include 'bootstrap.html' %}
@@ -10,7 +18,7 @@
 
     <div class="wrapper">
         {% include 'sidebar.html' %}
-        <div class="main-content">
+        <div class="main-content backgroud-gradient">
             <br>
             <h4 class="text-center mb-4 section_heading rounded"> {{cm}}</h4>
             <div class="col-3 mt-2">
