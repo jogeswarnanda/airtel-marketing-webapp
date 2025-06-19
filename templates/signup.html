@@ -7,13 +7,17 @@
 </head>
 
 <body>
-    {% include 'nav.html' %}
-    <img class="img-fluid mt-2 mb-2" id="banner" src="/static/banner.jpg">
-    <div class="container">
-        <h1 class="text-center mt-4 mb-4"> Sign Up </h1>
-        {% include 'form.html' %}
+    <div class="main-content backgroud-gradient">
+
+
+        {% include 'nav.html' %}
+        <img class="img-fluid mt-2 mb-2" id="banner" src="/static/banner.jpg">
+        <div class="container">
+            <h1 class="text-center mt-4 mb-4"> Sign Up </h1>
+            {% include 'form.html' %}
+        </div>
+        {% include 'footer.html' %}
     </div>
-    {% include 'footer.html' %}
 
     <!-- Auto-dismiss script -->
     <script>
