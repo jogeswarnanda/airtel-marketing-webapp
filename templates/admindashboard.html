@@ -65,7 +65,7 @@
                 <h3 class="mt-4">Audit Log</h3>
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
-                        <tr>
+                        <tr class="border-danger-subtle select-red">
                             <th>Date</th>
                             <th>Time</th>
                             <th>User</th>
@@ -74,14 +74,12 @@
                     </thead>
                     <tbody>
                         {% for user in auditr %}
-                        <tr>
+                        <tr class="border-danger-subtle select-red">
 
-                            <td class="border-danger-subtle select-red" name="f_name">{{ user.audit_date }}</td>
-                            <td class="border-danger-subtle select-red" name="f_mobile">{{ user.audit_time
-                                }}</td>
-
-                            <td class="border-danger-subtle select-red">{{ user.audit_user }}</td>
-                            <td class="border-danger-subtle select-red">{{ user.audit_desc }}</td>
+                            <td>{{ user.audit_date }}</td>
+                            <td>{{ user.audit_time}}</td>
+                            <td> {{ user.audit_user }}</td>
+                            <td> {{ user.audit_desc }}</td>
 
                         </tr>
                         {% endfor %}
