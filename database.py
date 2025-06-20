@@ -228,7 +228,7 @@ def create_audit(data):
 
 def fetch_audit(data):
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM audit"));
+    result = conn.execute(text("SELECT * FROM audit ORDER BY audit_date DESC, audit_time DESC LIMIT 100"));
     audit_result = result.fetchall()
     #print("rows", rows)
     return audit_result

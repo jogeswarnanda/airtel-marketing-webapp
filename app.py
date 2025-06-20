@@ -130,7 +130,7 @@ def login_page():
                     else:
                         data_audit = [formatted_date, formatted_time, username, "Logged in"]
                         create_audit(data_audit)
-                         
+                        print("data_audit bef us dash:", data_audit)
                         return user_dashboard()
                 else:
                     flash("Invalid role selected", "danger")
