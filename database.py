@@ -220,6 +220,20 @@ def db_leader_board(month):
   
   return curr_month_list
 
+def create_audit(data):
+  with engine.connect() as conn:
+    result1 = conn.execute(text("INSERT INTO audit (audit_date,audit_time,audit_user,audit_desc) VALUES(:u_audit_date,:u_audit_time,:u_audit_user,:u_audit_desc)"),
+    {"u_audit_date": data[0], "u_audit_time" : data[1],"u_audit_user" : data[2],"u_audit_desc" : data[3]});
+    conn.commit()
+
+def fetch_audit(data):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM audit"));
+    audit_result = result.fetchall()
+    #print("rows", rows)
+    return audit_result
+
+
 #result_dict1 = dict()
 #result_dict1 = dict(result_dict.key)
 #print(type(result_dict1))

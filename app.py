@@ -1,10 +1,11 @@
 from flask import Flask, render_template,request, redirect, flash, url_for,session
-from database import verify_login,add_user_to_db,fetch_upload_data,upload_data,update_user_to_db,db_leader_board,admin_update
+from database import verify_login,add_user_to_db,fetch_upload_data,upload_data,update_user_to_db,db_leader_board,admin_update,create_audit,upload_pic_to_db,fetch_audit
 import pandas as pd
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from datetime import datetime
+from datetime import date
 from dateutil.relativedelta import relativedelta
 import sys
 from dotenv import load_dotenv
@@ -20,6 +21,11 @@ UPLOAD_FOLDER = 'static/uploads'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+today = date.today()
+formatted_date = today.strftime("%d/%m/%Y")
+current_datetime = datetime.now()
+# Format the time as HH:MM:SS AM/PM
+formatted_time = current_datetime.strftime("%I:%M:%S %p")
 
 print("ver", sys.version)
 
@@ -122,6 +128,9 @@ def login_page():
                     if  ( role == "Admin" ):
                         return admin_dashboard()
                     else:
+                        data_audit = [formatted_date, formatted_time, username, "Logged in"]
+                        create_audit(data_audit)
+                         
                         return user_dashboard()
                 else:
                     flash("Invalid role selected", "danger")
@@ -273,11 +282,14 @@ def admin_dashboard():
             #mobile = session['mobile'] 
             #print("in admin dashboard")
             #print("seeess mob", session['mobile'])
+            dat = " "
+            auditr = fetch_audit(dat)
+
             admin_option = 's'
             users_updated = admin_update(users,admin_option,mobile)
             for user in users_updated:
                 print("user in admin", user)
-            return render_template('admindashboard.html',username=dash_name,users =users_updated)
+        return render_template('admindashboard.html',username=dash_name,users =users_updated,auditr=auditr)
     
         #print("name", username)
         #    name = request.form['name']
@@ -291,6 +303,10 @@ def admin_dashboard():
 @app.route("/logout/", methods=['GET', 'POST'])
 def logout_page():
   print("LOGOUT")
+  username = session['username']
+  data_audit = [formatted_date, formatted_time, username, "Logged Out"]
+  create_audit(data_audit)
+
   session.pop('username', None)
   session.clear()
   return redirect(url_for('login_page'))
@@ -346,6 +362,7 @@ def upload_file():
             upload_data(record)
 
         flash('Excel file uploaded and data saved to database!')
+        
         return redirect('/admindashboard')
 
     else:
@@ -439,6 +456,8 @@ def update_profile():
             if ( found_stat == "Y"):    
                 update_user_to_db(data)
                 flash("Data Updated!", "success")
+                data_audit = [formatted_date, formatted_time, session['username'], "Updated Profile"]
+                create_audit(data_audit)
                 session['username'] = p_name
                     # flash("Form submitted successfully!", "success")
                 return redirect(url_for('update_profile'))
@@ -470,6 +489,8 @@ def update_profile():
                 upload_pic_to_db(mobile,upload_pic_path)
 
                 flash('Pic uploaded and data saved to database!')
+                data_audit = [formatted_date, formatted_time, session['username'], "Changed Profile Pic"]
+                create_audit(data_audit)
                 return redirect('/updateprofile')
 
             else:
