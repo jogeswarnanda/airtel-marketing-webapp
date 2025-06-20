@@ -254,7 +254,7 @@ def admin_dashboard():
        #    admin_option = 's'
        #    data = request.form 
     else:
-        dash_name = session['username']
+        dash_name = "Admin Panel - " + session['username']
         users           = " "
         mobile          = " "
         if ( request.method == 'POST' ) and request.form.get('update'):
@@ -271,6 +271,7 @@ def admin_dashboard():
             users_updated2 = admin_update(users,admin_option,mobile)
             for user in users_updated2:
                 print("user in admin", user)
+            
             return render_template('admindashboard.html',username=dash_name,users =users_updated2)
             
             #return render_template('admindashboard.html',username=dash_name,users =users_updated)
@@ -286,9 +287,10 @@ def admin_dashboard():
             auditr = fetch_audit(dat)
 
             admin_option = 's'
-            users_updated = admin_update(users,admin_option,mobile)
+            users_updated = admin_update(users,admin_option,mobile) 
             for user in users_updated:
                 print("user in admin", user)
+        
         return render_template('admindashboard.html',username=dash_name,users =users_updated,auditr=auditr)
     
         #print("name", username)
@@ -322,6 +324,7 @@ def upload_file():
     if file.filename == '':
         flash('No selected file')
         return redirect('/')
+     
 
     if file and file.filename.endswith(('.xlsx', '.xls')):
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
@@ -362,8 +365,7 @@ def upload_file():
             upload_data(record)
 
         flash('Excel file uploaded and data saved to database!')
-        
-        return redirect('/admindashboard')
+       
 
     else:
         flash('Invalid file type. Please upload .xlsx or .xls')
