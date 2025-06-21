@@ -9,13 +9,14 @@ load_dotenv()
 #print(sqlalchemy.__version__)
 
 db_connection_string =  os.getenv('DB_CONNECTION_STRING')
-#print("conn str" , db_connection_string)
+print("conn str" , db_connection_string)
 db_s_string =  os.getenv('DB_SIKAN')
-#print("conn str sk" , db_s_string)
+print("conn str sk" , db_s_string)
 
 engine = create_engine(db_connection_string,connect_args={
     "ssl" :{
         "ca": "certs/cert.pem"
+        
     }
 })
 
